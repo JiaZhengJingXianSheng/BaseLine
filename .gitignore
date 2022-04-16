@@ -2,7 +2,21 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+result/
+dataset/
+models/
+/result
+/dataset
+/models
+*.pth
+/testset
+testset/
+tem/
+/tem
+.idea/
+/.idea
+*.iml
+models/
 # C extensions
 *.so
 
