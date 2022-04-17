@@ -8,7 +8,7 @@ models/
 /result
 /dataset
 /models
-*.pth
+
 /testset
 testset/
 tem/
@@ -19,7 +19,8 @@ tem/
 models/
 # C extensions
 *.so
-
+*.xmml
+*.idea
 # Distribution / packaging
 .Python
 build/

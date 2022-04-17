@@ -18,9 +18,13 @@ NoisyFiles = os.listdir(noisy_data_path)
 OriginFiles = os.listdir(origin_data_path)
 NoisyFiles_len = len(NoisyFiles)
 device = "cuda:0"
-lr = 0.000001
+
+lr = 0.00001
 loss = nn.L1Loss()
 epochs = 300
+
+
+
 
 
 def read_image(input_path):
@@ -51,9 +55,10 @@ def pre(input_path):
 
 
 if __name__ == "__main__":
-    net = Unet.Unet()
+    net = Unet.Unet().to(device)
+    net.load_state_dict(torch.load("model.pth"))
     optimizer = torch.optim.Adam(net.parameters(), lr=lr)
-    net.to(device)
+    # net.to(device)
 
     net.train()
     for epoch in range(epochs):
