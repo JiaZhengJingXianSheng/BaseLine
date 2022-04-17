@@ -18,7 +18,7 @@ NoisyFiles = os.listdir(noisy_data_path)
 OriginFiles = os.listdir(origin_data_path)
 NoisyFiles_len = len(NoisyFiles)
 device = "cuda:0"
-
+model_path = "BaseLine-90.pth"
 lr = 0.00001
 loss1 = nn.L1Loss()
 loss2 = nn.MSELoss()
@@ -54,7 +54,7 @@ def pre(input_path):
 
 if __name__ == "__main__":
     net = Unet.Unet().to(device)
-    net.load_state_dict(torch.load("BaseLine-38.pth"))
+    net.load_state_dict(torch.load(model_path))
     # optimizer = torch.optim.Adam(net.parameters(), lr=lr)
     optimizer = torch.optim.SGD(net.parameters(), lr=lr)
     # net.to(device)
