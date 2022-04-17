@@ -20,11 +20,9 @@ NoisyFiles_len = len(NoisyFiles)
 device = "cuda:0"
 
 lr = 0.00001
-loss = nn.L1Loss()
+loss1 = nn.L1Loss()
+loss2 = nn.MSELoss()
 epochs = 300
-
-
-
 
 
 def read_image(input_path):
@@ -56,8 +54,9 @@ def pre(input_path):
 
 if __name__ == "__main__":
     net = Unet.Unet().to(device)
-    net.load_state_dict(torch.load("model.pth"))
-    optimizer = torch.optim.Adam(net.parameters(), lr=lr)
+    net.load_state_dict(torch.load("BaseLine-38.pth"))
+    # optimizer = torch.optim.Adam(net.parameters(), lr=lr)
+    optimizer = torch.optim.SGD(net.parameters(), lr=lr)
     # net.to(device)
 
     net.train()
@@ -70,12 +69,14 @@ if __name__ == "__main__":
             optimizer.zero_grad()
 
             Y_HAT = net(X)
-            l = loss(Y_HAT, Y)
+            l1 = loss1(Y_HAT, Y)
+            l2 = loss2(Y_HAT, Y)
+            l = l1 + l2
             l.backward()
             optimizer.step()
 
             running_loss += l.item()
-        print("Epoch{}\tloss {}".format(epoch,running_loss/NoisyFiles_len))
+        print("Epoch{}\tloss {}".format(epoch, running_loss / NoisyFiles_len))
 
         print()
         torch.save(net.state_dict(), 'models/BaseLine-' + str(epoch) + '.pth')

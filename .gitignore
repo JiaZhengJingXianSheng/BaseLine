@@ -8,7 +8,9 @@ models/
 /result
 /dataset
 /models
-
+*.idea
+*.iml
+*.xml
 /testset
 testset/
 tem/
@@ -19,7 +21,7 @@ tem/
 models/
 # C extensions
 *.so
-*.xmml
+*.xml
 *.idea
 # Distribution / packaging
 .Python
