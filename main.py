@@ -18,9 +18,9 @@ NoisyFiles = os.listdir(noisy_data_path)
 OriginFiles = os.listdir(origin_data_path)
 NoisyFiles_len = len(NoisyFiles)
 device = "cuda:0"
-lr = 0.001
+lr = 0.000001
 loss = nn.L1Loss()
-epochs = 50
+epochs = 300
 
 
 def read_image(input_path):
@@ -70,7 +70,7 @@ if __name__ == "__main__":
             optimizer.step()
 
             running_loss += l.item()
-            print("Epoch{}\tloss {}".format(epoch,running_loss/NoisyFiles_len),end="")
+        print("Epoch{}\tloss {}".format(epoch,running_loss/NoisyFiles_len))
 
         print()
         torch.save(net.state_dict(), 'models/BaseLine-' + str(epoch) + '.pth')
