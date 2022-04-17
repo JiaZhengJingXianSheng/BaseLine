@@ -13,14 +13,16 @@ import torch
 import Unet
 from matplotlib import pyplot as plt
 import skimage
+
 noisy_path = "dataset/noisy/0_noise.dng"
-gt_path = "dataset\ground_truth/0_gt.dng"
+gt_path = "dataset/ground_truth/0_gt.dng"
 output_path = "tem/0_noise.dng"
 model_path = "BaseLine-38.pth"
 # device = "cuda:0"
 device = "cpu"
 white_level = 16383
 black_level = 1024
+
 
 def read_image(input_path):
     raw = rawpy.imread(input_path)
@@ -128,6 +130,13 @@ if __name__ == "__main__":
         gt.astype(np.float), result_write_data.astype(np.float), multichannel=True, data_range=white_level)
     print('psnr:', psnr)
     print('ssim:', ssim)
+
+    with open("log.txt", 'a+')as f:
+        f.writelines("-------------------\n")
+        f.writelines("model name: " + str(model_path) + "\n")
+        f.writelines("psnr: " + str(psnr) + "\n")
+        f.writelines("ssim: " + str(ssim) + "\n")
+        f.writelines("\n\n")
 
     """
     Example: this demo_code shows your input or gt or result image
