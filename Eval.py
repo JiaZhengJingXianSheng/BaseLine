@@ -125,9 +125,9 @@ if __name__ == "__main__":
     """
     gt = rawpy.imread(gt_path).raw_image_visible
     psnr = skimage.metrics.peak_signal_noise_ratio(
-        gt.astype(np.float), result_write_data.astype(np.float), data_range=white_level)
+        gt.astype(np.float64), result_write_data.astype(np.float64), data_range=white_level)
     ssim = skimage.metrics.structural_similarity(
-        gt.astype(np.float), result_write_data.astype(np.float), multichannel=True, data_range=white_level)
+        gt.astype(np.float64), result_write_data.astype(np.float64), channel_axis=True, data_range=white_level)
     print('psnr:', psnr)
     print('ssim:', ssim)
 
