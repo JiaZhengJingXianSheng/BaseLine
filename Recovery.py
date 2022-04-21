@@ -14,7 +14,7 @@ import Unet
 
 input_path = "testset"
 save_path = "result/denoise"
-model_path = "BaseLine-390.pth"
+model_path = "BaseLine-Model.pth"
 # device = "cuda:0"
 device = "cpu"
 
